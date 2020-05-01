@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    {% include 'headerfile.html' %}
+    <title>Dashboard</title>
+
+
+</head>
+<body>
+{% include 'adminnavbarhead.html' %}
+<div>
+    <h1>{{ request.session.admin.3}}</h1>
+</div>
+{% include 'adminnavbarfooter.html' %}
+
+<div class="overlay"></div>
+
+{% include 'footer.html' %}
+<script src="{% static 'myjs/adminNavbar.js' %}"></script>
+</body>
+</html>

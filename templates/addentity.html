@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AddEntity</title>
+    {% load static %}
+    {% include 'headerfile.html' %}
+</head>
+<body>
+{% include 'adminnavbarhead.html' %}
+
+<div class="container">
+    <div class="text-center">
+        <h1 class="comman-title">Entity</h1>
+    </div>
+    <div>
+        <form action="addentity" method="post" id="entity" enctype="multipart/form-data">{% csrf_token %}
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" required name="name" id="name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="designation">Designation</label>
+                        <input type="text" required name="designation" id="designation" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        <select name="type" id="type" class="form-control">
+                            <option value="Student">Student</option>
+                            <option value="Employee">Employee</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="departments">Departments</label>
+                        <select name="departments" id="departments" class="form-control">
+                            {% for foo in data %}
+                                <option value="{{ foo.id }}">{{ foo.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select name="status" id="status" class="form-control">
+                            <option value="Grant">Grant</option>
+                            <option value="Revoke">Revoke</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="fathername">Father's Name</label>
+                        <input type="text" required name="fathername" id="fathername" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="startTime">Start Time</label>
+                                <select name="startTime" id="startTime" class="form-control">
+                                    {% for foo in timing %}
+                                        <option value="{{ foo }}">{{ foo }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="endTime">End Time</label>
+                                <select name="endTime" id="endTime" class="form-control">
+                                    {% for foo in timing %}
+                                        <option value="{{ foo }}">{{ foo }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="height: 155px">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="photo">Photo</label>
+                                <input type="file" id="photo" name="photo" required class="form-control">
+                            </div>
+                            <div class="col-sm-6">
+                                <div id="showimage"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" required id="password" name="password" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" class="w-50 btn btn-outline-primary">Submit</button>
+            </div>
+        </form>
+
+        {% if result %}
+            {% if result == 'Sucess' %}
+                <div class="alert alert-success">
+                    <strong>Sucess !! New Row Added</strong>
+                </div>
+            {% else %}
+                <div class="alert alert-danger">
+                    <strong>Fail To Add New Row</strong>
+                </div>
+            {% endif %}
+
+        {% endif %}
+    </div>
+</div>
+
+
+{% include 'adminnavbarfooter.html' %}
+{% include 'footer.html' %}
+<script src="{% static 'myjs/adminNavbar.js' %}"></script>
+<script>
+    function addphotobash(element) {
+        var file = element.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function () {
+            document.getElementById('showimage').innerHTML = `<img src="${reader.result}" width="200px" height="150px">`;
+            // document.getElementById('bash').value = reader.result;
+            img = reader.result;
+            // return reader.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    $("#photo").change(function () {
+        addphotobash(this);
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{% load static %}
+<script src="{% static 'js/jquery-3.4.1.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'fontawesome/js/all.js' %}"></script>
+<script src="{% static 'ui/jquery-ui.js' %}"></script>
+<script src="{% static 'lightbox/dist/js/lightbox.js' %}"></script>
+<script src="{% static 'DataTables/datatables.js' %}"></script>
+<script src="{% static 'dist/jquery.validate.js' %}"></script>
+<script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+<script src="{% static 'QRJS_CSS/instascan.min.js' %}"></script>
+<script src="{% static 'QRJS_CSS/qrcode.js' %}"></script>
+
+<script>
+    function check() {
+        $('form').valid();
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('.myTable').DataTable();
+    });
+</script>

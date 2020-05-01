@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add news</title>
+    {% load static %}
+    {% include 'headerfile.html' %}
+    <link rel="stylesheet" href="{% static 'summernote-0.8.16-dist/summernote.css' %}">
+</head>
+<body>
+{% include 'adminnavbarhead.html' %}
+<div class="container">
+    <div class="text-center">
+        <h1 class="comman-title">Add News</h1>
+    </div>
+    <form action="addNews" method="post">{% csrf_token %}
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" required name="title" id="title" placeholder="Title" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="discription">Description</label>
+            <textarea required name="discription" id="discription" placeholder="Discription"
+                      class="form-control summernote"></textarea>
+        </div>
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary form-control w-50">Submit</button>
+        </div>
+        <div class="form-group">
+            {% if result %}
+                {% if result == 'Sucess' %}
+                    <div class="text-center alert alert-success">
+                        New news added Sucess.
+                    </div>
+                {% else %}
+                    <div class="text-center alert alert-danger">
+                        Fail to Insert
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </form>
+</div>
+{% with demo=1 %}
+    {{ demo }}
+{% endwith %}
+{% include 'adminnavbarfooter.html' %}
+
+{% include 'footer.html' %}
+<script src="{% static 'myjs/adminNavbar.js' %}"></script>
+<script src="{% static 'summernote-0.8.16-dist/summernote.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $('.summernote').summernote();
+    });
+</script>
+</body>
+</html>

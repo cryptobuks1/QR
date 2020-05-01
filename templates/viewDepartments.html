@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Departments</title>
+    {% load static %}
+    {% include 'headerfile.html' %}
+</head>
+<body>
+{% include 'adminnavbarhead.html' %}
+
+{% if result == 'no' %}
+    <div class="text-center alert alert-danger">
+        No Data Found !!!
+    </div>
+{% else %}
+    <div class="text-center">
+        <h1 class="comman-title">Departments</h1>
+    </div>
+    <div class="alert alert-secondary">
+        Result Found -> {{ data | length }}
+    </div>
+    <div class="table-responsive">
+        <table class="table myTable table-hover ">
+            <thead class="bg-dark text-white">
+            <tr class="text-center">
+                <th>S. No</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody class="">
+            {% for foo in data %}
+                <tr class="text-center">
+                    <td>{{ foo.count }}</td>
+                    <td>{{ foo.name }}</td>
+                    <td>{{ foo.location }}</td>
+                    <td><a href="delDepartments?id={{ foo.id }}" onclick="return confirm('Are you sure to delete?')"><i
+                            class="text-danger fas fa-trash"></i></a></td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+{% endif %}
+
+{% include 'adminnavbarfooter.html' %}
+
+{% include 'footer.html' %}
+<script src="{% static 'myjs/adminNavbar.js' %}"></script>
+</body>
+</html>

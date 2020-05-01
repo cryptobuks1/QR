@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Departments</title>
+    {% load static %}
+    {% include 'headerfile.html' %}
+</head>
+<body>
+{% include 'adminnavbarhead.html' %}
+
+<div class="container">
+    <div class="text-center">
+        <h1 class="comman-title">Add-Departments</h1>
+    </div>
+    <form action="addDepartments" method="post">{% csrf_token %}
+        <div class="form-group">
+            <label for="Dname">Name</label>
+            <input type="text" required name="Dname" id="Dname" placeholder="Name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" required name="location" id="location" placeholder="Location" class="form-control">
+        </div>
+        <div class="form-group text-center">
+            <button class="btn btn-primary w-50" type="submit">Submit</button>
+        </div>
+    </form>
+    {% if result %}
+        {% if result == 'Sucess' %}
+            <div class="alert alert-success text-center">
+                Inserted
+            </div>
+        {% elif result == 'no' %}
+            <div class="alert alert-danger text-center">
+                All Ready exist !!!
+            </div>
+        {% else %}
+            <div class="alert alert-danger text-center">
+                Fail to insert
+            </div>
+        {% endif %}
+    {% endif %}
+</div>
+
+
+{% include 'adminnavbarfooter.html' %}
+{% include 'footer.html' %}
+<script src="{% static 'myjs/adminNavbar.js' %}"></script>
+</body>
+</html>

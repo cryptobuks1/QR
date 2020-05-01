@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>viewEntity</title>
+    {% load static %}
+    {% include 'headerfile.html' %}
+</head>
+<body>
+{% include 'adminnavbarhead.html' %}
+
+<div class="container-fluid">
+    <div class="text-center">
+        <h1 class="comman-title">View-Entity</h1>
+    </div>
+    {{ data }}
+</div>
+
+
+{% include 'adminnavbarfooter.html' %}
+{% include 'footer.html' %}
+<script src="{% static 'myjs/adminNavbar.js' %}"></script>
+<script>
+    function createQrCode() {
+        var userInput = document.getElementById('valor').value;
+        var qrcode = new QRCode("qrcode", {
+            text: userInput,
+            width: 256,
+            height: 256,
+            colorDark: "black",
+            colorLight: "white",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    }
+</script>
+</body>
+</html>
