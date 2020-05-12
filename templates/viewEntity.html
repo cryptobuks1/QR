@@ -16,24 +16,85 @@
     <div class="text-center">
         <h1 class="comman-title">View-Entity</h1>
     </div>
-    {{ data }}
+    {#    {{ data }}#}
+    <div class="alert alert-warning">
+        <strong>Result -> {{ data|length }}</strong>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover myTable text-center">
+            <thead>
+            <tr>
+                <th>Email</th>
+                <th>Name</th>
+                {#                <th>F-Name</th>#}
+                <th>Dsignation</th>
+                <th>type</th>
+{#                <th><i class="fas fa-car"></i></th>#}
+                <th ><img class="text-warning" src="{% static 'images/transport.svg' %}" width="30" height="30" alt=""></th>
+                <th>Photo</th>
+                <th>Mail</th>
+                <th>View/Edit</th>
+                <th>Grant/Revok</th>
+                <th>Trash</th>
+            </tr>
+            </thead>
+            <tbody style="font-size: 13px">
+            {% for foo in data %}
+                <tr>
+                    <td>{{ foo.email }}</td>
+                    <td>{{ foo.name }}</td>
+                    {#                    <td>{{ foo.fatherName }}</td>#}
+                    <td>{{ foo.dsignation }}</td>
+                    <td>{{ foo.type }}</td>
+                    <td><a href="addVehicle?id={{ foo.id }}" class="text-danger"><i class="fa-2x fas fa-car-side"></i></a></td>
+                    <td><a href="{% static 'media/' %}{{ foo.photo }}" data-lightbox="image-1"
+                           data-title="{{ foo.name }}"><img src="{% static 'media/' %}{{ foo.photo }}" width="100"
+                                                            height="100"
+                                                            alt=""></a></td>
+                    <td><a href="sendmailpdf?id={{ foo.id }}" class="btn btn-outline-danger"><i
+                            class="fa-1x far fa-envelope"></i></a></td>
+                    <td><a href="viewEditEntity?id={{ foo.id }}" class="text-primary"><i
+                            class="fa-2x fas fa-eye"></i></a></td>
+                    <td>{% if foo.status == 'Grant' %}
+                        <a href="grantandRevokeEntity?id={{ foo.id }}&status=Revoke" class="btn btn-danger"
+                           onclick="return confirm('Are you sure to take the Grant?')">Revoke</a>
+                    {% else %}
+                        <a href="grantandRevokeEntity?id={{ foo.id }}&status=Grant" class="btn btn-warning"
+                           onclick="return confirm('Are you sure to give Gran?')">Grant</a>
+                    {% endif %} </td>
+                    <td><a href="deleteEntity?id={{ foo.id }}" class="fa-2x text-danger"
+                           onclick="return confirm('Are you Sure to delete?')"><i class="fa fa-trash"></i></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 
 
 {% include 'adminnavbarfooter.html' %}
 {% include 'footer.html' %}
 <script src="{% static 'myjs/adminNavbar.js' %}"></script>
+
 <script>
-    function createQrCode() {
-        var userInput = document.getElementById('valor').value;
-        var qrcode = new QRCode("qrcode", {
-            text: userInput,
-            width: 256,
-            height: 256,
-            colorDark: "black",
-            colorLight: "white",
-            correctLevel: QRCode.CorrectLevel.H
-        });
+    function addphotobash(element) {
+        var file = element.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function () {
+            document.getElementById('showimage').innerHTML = `<img src="${reader.result}" width="200px" height="150px">`;
+            // document.getElementById('bash').value = reader.result;
+            img = reader.result;
+            // return reader.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    $("#photo").change(function () {
+        addphotobash(this);
+    });
+
+    function modal() {
+        $('#mymodal').modal('show');
     }
 </script>
 </body>

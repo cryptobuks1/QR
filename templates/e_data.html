@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {% load static %}
+    {% include 'tempheaderfile.html' %}
+    {% include 'headerfile.html' %}
+</head>
+<body>
+
+{% include 'tempusernavbar.html' %}
+<section class="hero-banner hero-banner--sm mb-30px">
+    <div class="container">
+        <div class="hero-banner--sm__content">
+            <h1>E-Data</h1>
+            {#            <nav aria-label="breadcrumb" class="banner-breadcrumb">#}
+            {#                <ol class="breadcrumb">#}
+            {#                    <li class="breadcrumb-item"><a href="#">Home</a></li>#}
+            {#                    <li class="breadcrumb-item active" aria-current="page">Contact Us</li>#}
+            {#                </ol>#}
+            {#            </nav>#}
+        </div>
+    </div>
+</section>
+<br>
+<div class="container">
+{#{{ data }}#}
+    {% if final == 'notFound' %}
+        <div class="alert alert-warning">
+            <strong>No Data Found</strong>
+        </div>
+    {% else %}
+        <div class="table-responsive">
+            <table class="table table-light table-hover myTable">
+                <thead>
+                <tr>
+{#                    <th>Eid</th>#}
+                    <th>Entityid</th>
+                    <th>DateofEntery</th>
+                    <th>TimeofEntery</th>
+                    <th>DateofExit</th>
+                    <th>TimeofExit</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for foo in data %}
+                    <tr>
+{#                        <td>{{  foo.Eid }}</td>#}
+                        <td>{{  foo.Entityid }}</td>
+                        <td>{{  foo.DateofEntery }}</td>
+                        <td>{{  foo.TimeofEntery }}</td>
+                        <td>{{  foo.DateofExit }}</td>
+                        <td>{{  foo.TimeofExit }}</td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+</div>
+<br>
+
+
+{% include 'tempfootercontent.html' %}
+{% include 'tempFooter.html' %}
+{% include 'footer.html' %}
+
+</body>
+</html>

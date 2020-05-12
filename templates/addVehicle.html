@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AddVehicle</title>
+    {% load static %}
+    {% include 'headerfile.html' %}
+    <style>
+        body {
+        {#height: 100vh;#} background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url("{% static 'images/ildar-garifullin-KnDyg_Oiu_k-unsplash.jpg' %}") fixed no-repeat center/cover;
+            color: white;
+        }
+
+        .box {
+            -webkit-box-shadow: 10px 10px 130px 1px rgba(0, 0, 0, 0.75);
+            -moz-box-shadow: 10px 10px 130px 1px rgba(0, 0, 0, 0.75);
+            box-shadow: 10px 10px 130px 1px rgba(0, 0, 0, 0.75);
+            background-color: rgba(0, 0, 0, 0.7){#background-color: rgba(255, 255, 255, 0.2);#}
+        }
+    </style>
+</head>
+<body>
+{% include 'adminnavbarhead.html' %}
+<div class="container">
+    <div class="box" style="padding: 30px">
+        <div class="text-center">
+            <h1 class="">Vehicle</h1>
+        </div>
+        <form action="addVehicle?id={{ id }}" method="post">{% csrf_token %}
+            <div class="form-group">
+                <label for="entityid">Entityid</label>
+                <input type="text" readonly value="{{ id }}" class="form-control" name="id" id="id">
+            </div>
+            <div class="form-group">
+                <label for="vehiclenumber">vehiclenumber</label>
+                <input type="text" id="vehiclenumber" required name="vehiclenumber" class="form-control">
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="Starttime">Start Time</label>
+                        <select name="Starttime" id="Starttime" class="form-control">
+                            {% for foo in timing %}
+                                <option value="{{ foo }}">{{ foo }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="Endtime">End Time</label>
+                        <select name="Endtime" id="Endtime" class="form-control">
+                            {% for foo in timing %}
+                                <option value="{{ foo }}">{{ foo }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="Status">Status</label>
+                <select class="form-control" name="Status" id="Status">
+                    <option value="Grant">Grant</option>
+                    <option value="Grant">Revoke</option>
+                </select>
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" class="btn w-50 btn-outline-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+    {% if result and result == 'Sucess' %}
+        <div class="alert alert-success">
+            {{ result }}
+        </div>
+    {% elif result and result != 'Sucess' %}
+        <div class="alert alert-danger">
+            {{ result }}
+        </div>
+    {% endif %}
+</div>
+<br>
+<br>
+
+{% if listdata %}
+    <div class="container p3 text-dark bg-white">
+        <div class="text-center">
+            <h1>View</h1>
+        </div>
+        {#        {{ listdata }}#}
+        {% for foo in listdata %}
+            <hr>
+            <div class="row">
+                <div class="col-sm-4 text-right">
+                    <img src="{{ foo.Stickered }}" width="140" alt="">
+                </div>
+                <div class="col-sm-6">
+                    <strong>Vid :</strong>{{ foo.id }}<br>
+                    <strong>V-number :</strong>{{ foo.vnumber }}<br>
+                    <strong>Start-Time :</strong>{{ foo.startTime }}<br>
+                    <strong>End-Time :</strong>{{ foo.endTime }}<br>
+                    <br>
+                    <br>
+                    {% if foo.status == 'Grant' %}
+                        <a href="vehicleGrant?eid={{ foo.eid }}&vid={{ foo.id }}&status=Revoke"
+                           class="btn w-25 btn-danger">Revoke</a>
+                    {% else %}
+                        <a href="vehicleGrant?eid={{ foo.eid }}&vid={{ foo.id }}&status=Grant"
+                           class="btn w-25 btn-primary">Grant</a>
+                    {% endif %}
+                </div>
+                <div class="col-sm-2 align-self-center">
+                    <a class="btn btn-outline-danger" onclick="return confirm('Are you Sure to Delete this?')" href="deleteVehiclePass?eid={{ foo.eid }}&vid={{ foo.id }}&page=apage"><i class="fa-2x fa fa-trash"></i></a>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% include 'adminnavbarfooter.html' %}
+{% include 'footer.html' %}
+<script src="{% static 'myjs/adminNavbar.js' %}"></script>
+
+</body>
+</html>

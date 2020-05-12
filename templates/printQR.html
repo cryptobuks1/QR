@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #btn {
+            background: #0000cc;
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            {#border-color: #0000cc;#}
+            border: 3px solid #0000cc;
+
+        }
+
+        #btn:hover {
+            color: black;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+{#{{ result }}#}
+<img src="{{ result.1 }}" alt=""><br>
+<span style="margin-left: 80px">{{ result.2 }}</span>
+<br>
+
+<div id="bo">
+    <br>
+    <br>
+    <button type="button" onclick="printtable()">Print</button>
+    <br>
+    <br>
+    <a href="allVehicle" id="btn">View All Vehicles</a>
+</div>
+
+<script>
+    function printtable() {
+        document.getElementById("bo").style.display = "none";
+        window.print();
+        document.getElementById("bo").style.display = "block";
+    }
+</script>
+
+</body>
+</html>

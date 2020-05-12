@@ -16,3 +16,21 @@
     transform: translate(-5px,-3px);
     text-shadow: 2px 5px 20px #aaa;
 }
+.comman-title1{
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 500;
+    text-shadow: 2px 2px 5px #aaa;
+    transition: all .5s;
+}
+.comman-title1:first-letter{
+    color: red;
+    font-family: 'Great Vibes', cursive;
+    font-size: 1rem;
+    font-style: normal;
+    margin-right: 10px;
+}
+.comman-title1:hover{
+    transform: translate(-5px,-3px);
+    text-shadow: 2px 5px 20px #aaa;
+}

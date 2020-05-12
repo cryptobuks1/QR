@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>allEnteryVehicle</title>
+    {% load static %}
+    {% include 'headerfile.html' %}
+    <style>
+        body {
+        {#height: 100vh;#} background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url("{% static 'images/ildar-garifullin-KnDyg_Oiu_k-unsplash.jpg' %}") fixed no-repeat center/cover;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+{% include 'adminnavbarhead.html' %}
+
+<div class="container">
+    <div class="text-center">
+        <h1>All-Entery-Vehicle</h1>
+    </div>
+{#    {{ data }}#}
+    <div class="table-responsive">
+        <table class="table table-hover table-light myTable">
+            <thead>
+            <tr>
+                <td>E-id</td>
+                <td>Number</td>
+                <td>Enter-date</td>
+                <td>Enter-Time</td>
+                <td>Exit-Date</td>
+                <td>Exit-Time</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for foo in data %}
+                <tr>
+                    <td>{{ foo.E_id }}</td>
+                    <td>{{ foo.vnumber }}</td>
+                    <td>{{ foo.EnterTime }}</td>
+                    <td>{{ foo.Enterdate }}</td>
+                    <td>{{ foo.exitdate }}</td>
+                    <td>{{ foo.exitTime }}</td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% include 'adminnavbarfooter.html' %}
+{% include 'footer.html' %}
+<script src="{% static 'myjs/adminNavbar.js' %}"></script>
+</body>
+</html>

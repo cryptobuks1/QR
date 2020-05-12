@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vehicle</title>
+    {% load static %}
+    {% include 'headerfile.html' %}
+    <style>
+        body {
+        {#height: 100vh;#} background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url("{% static 'images/ildar-garifullin-KnDyg_Oiu_k-unsplash.jpg' %}") fixed no-repeat center/cover;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+{% include 'adminnavbarhead.html' %}
+{#{{ data }}#}
+<div class="container">
+    <div class="text-center">
+        <h1>Vehicle</h1>
+    </div>
+    <div class="table-responsive">
+        <table class="table myTable table-light text-center">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>V-number</th>
+                <th>StartTime</th>
+                <th>EndTime</th>
+                <th>Sticker</th>
+                <th>Delete</th>
+{#                <th>G/R</th>#}
+                <th>print</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for foo in data %}
+                <tr>
+                    <td>{{ foo.name }}</td>
+                    <td>{{ foo.vNumber }}</td>
+                    <td>{{ foo.startTime }}</td>
+                    <td>{{ foo.endtTime }}</td>
+                    <td><img src="{{ foo.stickered }}" height="100" width="100" alt=""></td>
+
+                    <td>
+                        <a class="btn btn-outline-danger" onclick="return confirm('Are you Sure to Delete this?')"
+                           href="deleteVehiclePass?eid={{ foo.eid }}&vid={{ foo.vid }}&page=vpage"><i
+                                class="fa fa-trash"></i></a>
+                    </td>
+{#                    <td>{% if foo.status == 'Grant' %}#}
+{#                        <a href="vehicleGrant?eid={{ foo.eid }}&vid={{ foo.id }}&status=Revoke"#}
+{#                           class="btn w-25 btn-danger">Revoke</a>#}
+{#                    {% else %}#}
+{#                        <a href="vehicleGrant?eid={{ foo.eid }}&vid={{ foo.id }}&status=Grant"#}
+{#                           class="btn w-25 btn-primary">Grant</a>#}
+{#                    {% endif %}</td>#}
+                    <td><a href="printQR?vid={{ foo.vid }}" class="text-primary"><i class="fa fa-print"></i></a></td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% include 'adminnavbarfooter.html' %}
+{% include 'footer.html' %}
+<script src="{% static 'myjs/adminNavbar.js' %}"></script>
+</body>
+</html>

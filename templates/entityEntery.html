@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>entityEntery</title>
+    {% load static %}
+    {#    {% include 'headerfile.html' %}#}
+    <style>
+        body {
+            background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url("{% static 'images/ildar-garifullin-KnDyg_Oiu_k-unsplash.jpg' %}") fixed no-repeat center/cover;
+            color: white;
+        }
+    </style>
+    {% include 'tempheaderfile.html' %}
+    <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+</head>
+<body>
+{#{% include 'usernavbar.html' %}#}
+{% include 'tempusernavbar.html' %}
+<br>
+<br>
+<br>
+<div class="container text-center">
+    <hr style="background: white">
+    <h3 style="color: white">Welcome To QR-Entery System</h3>
+</div>
+
+<div class="text-center">
+    <video id="preview"></video>
+    <br>
+    {#    <a href="exitEntery" class="btn btn-outline-success">ExitSystem</a>#}
+    <h5 id="result"></h5>
+    <script>
+        let scanner = new Instascan.Scanner(
+            {
+                video: document.getElementById('preview')
+            }
+        );
+        scanner.addListener('scan', function (content) {
+            {#alert('Escaneou o conteudo: ' + content);#}
+            // window.open(content, "_blank");
+            document.getElementById('result').innerHTML = content;
+
+            var formdata = new FormData()
+            formdata.append('qrdata', content);
+            var xml = new XMLHttpRequest();
+            xml.onreadystatechange = function () {
+                if (this.status == 200 && this.readyState == 4) {
+                    var output = this.response
+                    if (output == 'fail') {
+                        var final = `
+                                <div class="alert-danger">
+                                        <strong>There is some prob!!!!!</strong>
+                                </div>`
+                    } else if (output == 'not') {
+                        var final = `
+                                <div class="alert-danger">
+                                        <strong>You are Not Registered or Wait For grant</strong>
+                                </div>`
+                    } else if (output == 'allready') {
+                        var final = `
+                                <div class="alert-warning">
+                                        <strong>All Ready Entered</strong>
+                                </div>`
+                    } else {
+                        var final = `
+                                <div class="alert-success">
+                                        <strong>Hello ----> ${output}. Have a Nice Day!!</strong>
+                                </div>`
+                    }
+                    document.getElementById('result').innerHTML = final;
+                }
+            }
+            xml.open('POST', 'addentityEntery', true);
+            xml.send(formdata);
+
+        });
+        Instascan.Camera.getCameras().then(cameras => {
+            if (cameras.length > 0) {
+                scanner.start(cameras[0]);
+            } else {
+                console.error("Não existe câmera no dispositivo!");
+            }
+        });
+    </script>
+
+    {#    {% include 'footer.html' %}#}
+    {% include 'tempFooter.html' %}
+</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            Add a readonly attribute to an input tag
+        </title>
+    </head>
+
+    <body style = "text-align:center;">
+
+        <h1 style = "color:green;" >
+            GeeksForGeeks
+        </h1>
+
+        <p style = "font-size: 15px; font-weight: bold;">
+            The readonly attribute is added to input
+            box on click on the button.
+        </p>
+
+        <form>
+            Input : <input id = "Input" readonly type="text"
+                name="input_field" />
+        </form>
+        <br>
+
+        <button onclick = "GFG_Run()">
+            click here
+        </button>
+
+        <p id = "GFG_down" style =
+            "color: green; font-size: 20px; font-weight: bold;">
+        </p>
+
+        <script>
+            function GFG_Run() {
+                document.getElementById('Input').readOnly
+                        = false;
+
+                document.getElementById("GFG_down").innerHTML
+                        = "Read-Only attribute enabled";
+            }
+        </script>
+    </body>
+</html>
