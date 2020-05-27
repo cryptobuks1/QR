@@ -30,3 +30,7 @@ def confirm_Msg(mobile,msg):
                      mobile))
     response = conn.getresponse()
     print(response)
+
+
+if __name__ == '__main__':
+    send_Otp(6280995201)

@@ -784,7 +784,7 @@ def exitenteryAction(request):
         result2 = Fetchall(query2)
         print("######-->", result2)
         if result2:
-            query1 = "UPDATE `Entity_entry` SET `Exittime`='{2}',`exitdate`='{1}' WHERE `Entityid`='{0}'".format(
+            query1 = "UPDATE `Entity_entry` SET `Exittime`='{2}',`exitdate`='{1}' WHERE `Entityid`='{0}' and `Dateofentry` is not NULL and `Exittime` is NULL".format(
                 qdata[0], qrdate, qrtime)
             result1 = Insert(query1)
             print(result1)
@@ -860,7 +860,7 @@ def exitVehicleAction(request):
         result2 = Fetchone(query)
         print(result2)
         if result2:
-            query = "UPDATE `Vehicle_Entry` SET `Exittime`='{}', `dateofexit`='{}' WHERE `Vehicleid`='{}'".format(
+            query = "UPDATE `Vehicle_Entry` SET `Exittime`='{}', `dateofexit`='{}' WHERE `Vehicleid`='{}' and `Vehicle_Entry`.`Entrytime` is not  NULL and `Vehicle_Entry`.`dateofexit` is  NULL".format(
                 qrtime, qrdate, result[0][0])
             print(query)
             result = Insert(query)

@@ -9,8 +9,8 @@ from email.mime.text import MIMEText
 # sender = 'python.vmm@gmail.com'
 # password = 'vmmpython'
 
-sender = 'tania.vmmteachers23@gmail.com'
-password = 'Teachers@123'
+sender = 'python.vmm.2020@gmail.com'
+password = 'pythonvmm2020'
 
 
 # receiver = 'rahul@vmmeducation.com'
@@ -87,7 +87,7 @@ def mailwithAttachemnt(reciver,id,filelocation):
 
     sender_email = "tania.vmmteachers23@gmail.com"
     receiver_email = reciver
-    password = "Teachers@123"
+    password = "Teachers@1234"
 
     # Create a multipart message and set headers
     message = MIMEMultipart()
